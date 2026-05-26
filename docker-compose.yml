@@ -8,10 +8,14 @@ services:
     restart: unless-stopped
     network_mode: host
     volumes:
-      - ./data:/app/data
+      - micamerapro_data:/app/data
     environment:
       - PORT=${PORT:-3000}
       - DATA_DIR=${DATA_DIR:-/app/data}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - XIAOMI_USER=${XIAOMI_USER:-}
       - XIAOMI_TOKEN=${XIAOMI_TOKEN:-}
+
+volumes:
+  micamerapro_data:
+    external: true
