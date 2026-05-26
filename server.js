@@ -169,9 +169,9 @@ const apiProxy = createProxyMiddleware({
   }
 });
 
-// Configure Express body-parsing middlewares BEFORE setting up routes
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Configure Express body-parsing middlewares for specific non-proxied routes only
+const jsonParser = express.json();
+const urlencodedParser = express.urlencoded({ extended: true });
 
 // 4. Session & Authentication Management
 const activeSessions = new Set();
@@ -182,7 +182,7 @@ app.get('/api/auth/status', (req, res) => {
 });
 
 // Admin login verification
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', jsonParser, urlencodedParser, (req, res) => {
   const { password } = req.body;
   const adminPassword = process.env.ADMIN_PASSWORD;
 
@@ -232,7 +232,7 @@ const authMiddleware = (req, res, next) => {
 app.use('/api', authMiddleware);
 
 // Intercept specific logout requests (removes accounts from go2rtc.yaml)
-app.post('/api/xiaomi/logout', (req, res) => {
+app.post('/api/xiaomi/logout', jsonParser, (req, res) => {
   const { id } = req.body;
   console.log(`[MiCameraPro] Logout requested for account ID: ${id || 'all'}`);
   
