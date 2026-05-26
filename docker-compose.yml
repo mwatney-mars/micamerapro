@@ -10,8 +10,8 @@ services:
     volumes:
       - ./data:/app/data
     environment:
-      - PORT=3000
-      - DATA_DIR=/app/data
-      - ADMIN_PASSWORD=adminpassword # Set your custom administrator console password
-      - XIAOMI_USER=             # Optional: pre-populate Xiaomi cloud username on boot
-      - XIAOMI_TOKEN=            # Optional: pre-populate Xiaomi cloud password/token on boot
+      - PORT=${PORT:-3000}
+      - DATA_DIR=${DATA_DIR:-/app/data}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - XIAOMI_USER=${XIAOMI_USER:-}
+      - XIAOMI_TOKEN=${XIAOMI_TOKEN:-}
