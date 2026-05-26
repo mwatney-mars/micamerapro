@@ -1,0 +1,30 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+
+# Persistent storage & sessions
+.sessions/
+go2rtc.yaml
+
+# Python cleanup (removed PTZ features)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+control_camera.py
+test_xiaomi.py
+
+# Temp and logs
+*.log
+*.db
+scratch/
+.antigravitycli/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
